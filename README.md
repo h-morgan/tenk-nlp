@@ -37,3 +37,11 @@ Optionally, you can provide the `-m` or `--model` argument to tell it which NLP 
 
 - `GPT`
 - `BART`
+
+## Running tests
+
+To run tests using pytest, run:
+
+```bash
+poetry run pytest
+```
