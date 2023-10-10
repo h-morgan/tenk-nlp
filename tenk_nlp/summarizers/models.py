@@ -1,7 +1,13 @@
+import os
+
 from loguru import logger
 import time
 import openai
 from transformers import pipeline
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def load_model(model_name: str):
@@ -52,12 +58,13 @@ class BARTModel:
 
 class ChatGPT:
     model_name = "GPT"
+    api_key = os.getenv("OPENAI_API_KEY")
 
     def get_summary_from_api(self, text: str) -> str:
         """Function where request to Chat GPT API occurs"""
         length = 500
         model_engine = "text-davinci-002"
-        openai.api_key = "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"
+        openai.api_key = self.api_key
         prompt = f"Summarize the following text in {length} words or fewer: " f"{text}"
         completions = openai.Completion.create(
             engine=model_engine,
