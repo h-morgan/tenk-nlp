@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "tenk-nlp"
+version = "0.1.0"
+description = "Apply NLP to 10-K reports and generate keywords and summaries for specific sections."
+authors = ["Haley Morgan <haleymorgan3264@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+click = "^8.1.7"
+loguru = "^0.7.2"
+transformers = "^4.33.2"
+nltk = "^3.8.1"
+openai = "^0.28.0"
+torch = "^2.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+keywords = "tenk_nlp.cli:keywords"
+summary = "tenk_nlp.cli:summarize"
