@@ -91,11 +91,11 @@ def get_10k(ticker, year):
 
 
 @click.command()
-def get_companies():
+def extract_companies():
     get_all_companies()
 
 
 cli.add_command(summarize)
 cli.add_command(keywords)
 cli.add_command(get_10k)
-cli.add_command(get_companies)
+cli.add_command(extract_companies)
