@@ -1,10 +1,9 @@
-# 10-K NLP
+# 10-K NLP Data ETL Services
 
-This repo holds functionality related to the 10-K NLP service, including:
+This repo holds functionality for the ETL services required to populate the database needed for the 10k NLP API. The logic in this repo includes:
 
 - ETL for company data, 10K reports, and other related data from various sources
 - Performing the NLP analysis on company 10Ks, including keyword generation and summarization
-- API for retreiving this data (both pre-processed and processed) from the database
 
 Note: this service is still under construction, so functionality isn't complete yet.
 
@@ -19,8 +18,6 @@ Note: this service is still under construction, so functionality isn't complete 
 - [3. How to use](#3-how-to-use)
   - [3.1 Data ETL](#31-data-etl)
   - [3.2 NLP](#32-nlp)
-  - [3.3 Running the API](#33-running-the-api)
-  - [3.4 Interacting with the API](#34-interacting-with-the-api)
 - [4. Running Tests](#4-running-tests)
 
 ## 1. Data Sources and Processing
@@ -107,10 +104,6 @@ Optionally, you can provide the `-m` or `--model` argument to tell it which NLP 
 
 - `GPT`
 - `BART`
-
-### 3.3 Running the API
-
-### 3.4 Interacting with the API
 
 ## 4. Running tests
 
