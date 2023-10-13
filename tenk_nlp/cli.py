@@ -1,9 +1,16 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import click
 from loguru import logger
 
 from tenk_nlp.keywords.keyword_gen import run_keyword_generator
 from tenk_nlp.summarizers.summarizer import Summarizer
 from tenk_nlp.summarizers.models import load_model
+
+from tenk_nlp.sec_data.sec_edgar import go
+from tenk_nlp.extract.companies import get_all_companies
 
 
 @click.group()
@@ -65,5 +72,30 @@ def keywords(number):
     print(kw)
 
 
+@click.command()
+@click.option(
+    "-t",
+    "--ticker",
+    default=None,
+    help="Stock ticker of company to retrieve 10K for",
+)
+@click.option(
+    "-y",
+    "--year",
+    default=2023,
+    help="Year of 10K desired, most recent is default",
+)
+def get_10k(ticker, year):
+
+    go()
+
+
+@click.command()
+def get_companies():
+    get_all_companies()
+
+
 cli.add_command(summarize)
 cli.add_command(keywords)
+cli.add_command(get_10k)
+cli.add_command(get_companies)

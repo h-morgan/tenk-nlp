@@ -5,10 +5,6 @@ import time
 import openai
 from transformers import pipeline
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 
 def load_model(model_name: str):
 
