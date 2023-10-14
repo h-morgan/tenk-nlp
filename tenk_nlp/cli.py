@@ -4,13 +4,11 @@ load_dotenv()
 
 import click
 from loguru import logger
-
-from tenk_nlp.keywords.keyword_gen import run_keyword_generator
-from tenk_nlp.summarizers.summarizer import Summarizer
-from tenk_nlp.summarizers.models import load_model
-
-from tenk_nlp.sec_data.sec_edgar import go
 from tenk_nlp.extract.companies import get_all_companies
+from tenk_nlp.keywords.keyword_gen import run_keyword_generator
+from tenk_nlp.sec_data.sec_edgar import go
+from tenk_nlp.summarizers.models import load_model
+from tenk_nlp.summarizers.summarizer import Summarizer
 
 
 @click.group()
