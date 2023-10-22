@@ -1,7 +1,7 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Boolean, DateTime
-
 import os
+
+from sqlalchemy import Boolean, Column, DateTime, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
@@ -26,4 +26,4 @@ class Company(Base):
     fama_industry = Column(String)
     currency = Column(String)
     location = Column(String)
-    created_on = Column(DateTime(), nullable=False)
+    updated_at = Column(DateTime(), nullable=False)
