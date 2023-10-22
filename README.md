@@ -15,6 +15,9 @@ Note: this service is still under construction, so functionality isn't complete 
   - [1.3 Load](#13-load)
 - [2. Requirements and Setup](#2-requirements-and-setup)
   - [2.1 Environment Variables](#21-environment-variables)
+  - [2.2 Dev Database Connection](#22-dev-database-connection)
+  - [2.3 Prod Database Connection](#23-prod-database-connection)
+  - [2.4 Database Migrations](24-database-migrations)
 - [3. How to use](#3-how-to-use)
   - [3.1 Data ETL](#31-data-etl)
   - [3.2 NLP](#32-nlp)
@@ -66,6 +69,48 @@ The following environment variables may be required, depending on how you are us
 OPENAI_API_KEY= # ChatGPT / OpenAI API key, for requesting summaries from ChatGPT
 
 SEC_API_IO_API_KEY= # sec-api.io API key, if performing company data extraction
+```
+
+### 2.2 Dev Database Connection
+
+During development, we use a locally running sqlite database, and run the alembic migration to make sure the database has the latest updates.
+
+That just requires 2 db env vars:
+
+```
+DB_DRIVER=sqlite
+DB_HOST=/path/to/db/file/dev.db
+```
+
+Note: if this is your first time setting up your dev env, to create a sqlite db on a mac all you need to do is create a file with a `.db` extension, anywhere on your machine. You can then open any compatible database gui of your choice, like dbeaver, etc.
+
+### 2.3 Prod Database Connection
+
+When running on prod, we use a MySQL database, and the following env vars are required:
+
+```
+DB_DRIVER=mysql
+DB_USERNAME=username
+DB_PASSWORD=password
+DB_HOST=host
+DB_PORT=3306
+DB_NAME=prod
+```
+
+\*\*Replace values with actual prod db connection details
+
+### 2.4 Database Migrations
+
+If you're setting up a new database for the first time, you'll need to run the latest database migration. The command to do that is:
+
+```bash
+poetry run alembic upgrade head
+```
+
+To update the database schema, you'll need to generate a new migration. To do that, all you have to do is update the models in the [tenk_nlp/db/models.py file](tenk_nlp/db/models.py) and then run the following command, which will automatically generate a new migration in the [alembic/versions/](alembic/versions/) directory:
+
+```bash
+poetry run alembic revision --autogenerate -m 'migration description'
 ```
 
 ## 3. How to use
