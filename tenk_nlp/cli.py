@@ -4,7 +4,7 @@ load_dotenv()
 
 import click
 from loguru import logger
-from tenk_nlp.extract.companies import get_all_companies
+from tenk_nlp.etl.companies import ETLcompanies, update_company_files
 from tenk_nlp.keywords.keyword_gen import run_keyword_generator
 from tenk_nlp.sec_data.sec_edgar import go
 from tenk_nlp.summarizers.models import load_model
@@ -89,11 +89,32 @@ def get_10k(ticker, year):
 
 
 @click.command()
-def extract_companies():
-    get_all_companies()
+def update_company_files():
+    update_company_files()
+
+
+@click.command()
+@click.option(
+    "-d",
+    "--data",
+    default="company",
+    type=click.Choice(["company", "10k"]),
+    help="Type of data to run the full ETL pipeline for",
+)
+def etl(data):
+
+    """
+    the main ETL pipeline for all data needed to power 10k nlp
+    can either run for company data or 10k data
+    """
+    etl_factory = {"company": ETLcompanies}
+
+    etl = etl_factory[data]()
+    etl.run()
 
 
 cli.add_command(summarize)
 cli.add_command(keywords)
 cli.add_command(get_10k)
-cli.add_command(extract_companies)
+cli.add_command(update_company_files)
+cli.add_command(etl)
